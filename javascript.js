@@ -48,6 +48,16 @@ function input() {
 
 function submit() {
   let box = document.querySelector('#userInput').value.replace(/ /g, '').split(/([\(\)\+\-\*\/])/g).filter(item => item !== '');
+  for (let i = 0; i < box.length - 1; i++) {
+    const currentElement = box[i];
+    const nextElement = box[i + 1];
+    if (
+      (currentElement === "+" || currentElement === "-" || currentElement === "*" || currentElement === "/") &&
+    (nextElement === "+" || nextElement === "-" || nextElement === "*" || nextElement !== "/")
+    ) {
+      return 'ERROR'
+    }
+  }
   return compute(box);
 }
 
@@ -58,7 +68,6 @@ function remove() {
 
 function compute(expression) {
   let box = document.querySelector('#userInput').value.replace(/ /g, '').split(/([\(\)\+\-\*\/])/g).filter(item => item !== '');
-  console.log(expression)
   for (let i = 0; i < expression.length; i++) {
     if (expression[i] === '(') {
       findParenthesis(expression, i);
@@ -67,23 +76,14 @@ function compute(expression) {
   }
   for (let i = 0; i < expression.length; i++) {
     if (/[/*]/.test(expression[i])) {
-      if (expression[i+1] === '+' || expression[i+1] === '-' ||expression[i+1] === '/' ||expression[i+1] === '*') {
-        return 'ERROR'
-      }
-      console.log(expression[i-1]);
-      console.log(expression[i+1]);
       let operator = expression[i];
       let result = eval(`${expression[i-1]} ${operator} ${expression[i+1]}`);
       expression.splice(i-1, 3, result);
-      console.log(expression);
       i = i - 3;
     }
   }
   for (let i = 0; i < expression.length; i++) {
     if (expression[i] === '-' || expression[i] === '+') {
-      if (expression[i+1] === '+' || expression[i+1] === '-' ||expression[i+1] === '/' ||expression[i+1] === '*') {
-        return 'ERROR'
-      }
       console.log(expression[i-1]);
       console.log(expression[i+1]);
       let operator = expression[i];
@@ -111,7 +111,6 @@ function findParenthesis(expression, number) {
     }
   newExpression = compute(newExpression);
   expression.splice(number, k+2, ...newExpression);
-  console.log(expression);
   return newExpression
 }
 
