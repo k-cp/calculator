@@ -7,8 +7,49 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <input type="text" id="userInput" required>
-    <button type="submit" id="calculate" onclick="submit()">Calculate</button>
+    <header>Calculator</header>
+    <div id="page">
+        <div id="left"></div>
+        <div class="container">
+            <input type="text" id="userInput" required>
+            <div>
+                <div>
+                    <button>(</button>
+                    <button>)</button>
+                    <button>Delete</button>
+                    <button>Clear</button>
+                </div>
+                <div class="row">
+                    <button>7</button>
+                    <button>8</button>
+                    <button>9</button>
+                    <button>/</button>
+                </div>
+                <div class="row">
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                    <button>*</button>
+                </div>
+                <div class="row">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>-</button>
+                </div>
+                <div class="row">
+                    <button>0</button>
+                    <button>.</button>
+                    <button type="submit" id="calculate" onclick="submit()">=</button>
+                    <button>+</button>
+                </div>
+            </div>
+        </div>
+        <div id="right"></div>
+    </div>
+
+
+
     <script src="javascript.js"></script>
 </body>
 </html>
