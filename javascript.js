@@ -39,6 +39,9 @@ function input() {
   if (this.textContent == 'Delete') return remove()
   if (this.textContent == 'Clear') return box.value = null;
   if (this.textContent == '=') return box.value += '=' + submit();
+  if (/=/.test(box.value)) {
+    box.value = null;
+  }
   box.value += this.textContent;
   return
 }
@@ -54,6 +57,7 @@ function remove() {
 }
 
 function compute(expression) {
+  let box = document.querySelector('#userInput').value.replace(/ /g, '').split(/([\(\)\+\-\*\/])/g).filter(item => item !== '');
   console.log(expression)
   for (let i = 0; i < expression.length; i++) {
     if (expression[i] === '(') {
@@ -63,6 +67,9 @@ function compute(expression) {
   }
   for (let i = 0; i < expression.length; i++) {
     if (/[/*]/.test(expression[i])) {
+      if (expression[i+1] === '+' || expression[i+1] === '-' ||expression[i+1] === '/' ||expression[i+1] === '*') {
+        return 'ERROR'
+      }
       console.log(expression[i-1]);
       console.log(expression[i+1]);
       let operator = expression[i];
@@ -74,6 +81,9 @@ function compute(expression) {
   }
   for (let i = 0; i < expression.length; i++) {
     if (expression[i] === '-' || expression[i] === '+') {
+      if (expression[i+1] === '+' || expression[i+1] === '-' ||expression[i+1] === '/' ||expression[i+1] === '*') {
+        return 'ERROR'
+      }
       console.log(expression[i-1]);
       console.log(expression[i+1]);
       let operator = expression[i];
