@@ -49,11 +49,11 @@ function input() {
 function submit() {
   let box = document.querySelector('#userInput').value.replace(/ /g, '').split(/([\(\)\+\-\*\/])/g).filter(item => item !== '');
   for (let i = 0; i < box.length - 1; i++) {
-    const currentElement = box[i];
-    const nextElement = box[i + 1];
+    let currentElement = box[i];
+    let nextElement = box[i + 1];
     if (
       (currentElement === "+" || currentElement === "-" || currentElement === "*" || currentElement === "/") &&
-    (nextElement === "+" || nextElement === "-" || nextElement === "*" || nextElement !== "/")
+    (nextElement === "+" || nextElement === "-" || nextElement === "*" || nextElement === "/")
     ) {
       return 'ERROR'
     }
