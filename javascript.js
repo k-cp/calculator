@@ -76,6 +76,9 @@ function compute(expression) {
   }
   for (let i = 0; i < expression.length; i++) {
     if (/[/*]/.test(expression[i])) {
+      if (expression[i] === '/' && expression[i+1] === '0') {
+        return 'ERROR'
+      }
       let operator = expression[i];
       let result = eval(`${expression[i-1]} ${operator} ${expression[i+1]}`);
       expression.splice(i-1, 3, result);
